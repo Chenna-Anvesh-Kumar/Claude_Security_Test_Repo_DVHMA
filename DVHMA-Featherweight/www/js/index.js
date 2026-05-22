@@ -99,7 +99,7 @@ function reloadItems(items) {
 		headDiv.appendChild(span);
 		
 		var p = document.createElement("p");
-		p.innerHTML = entry;
+		p.textContent = entry;
 		headDiv.appendChild(p);
 		
 		var buttonDiv = document.createElement("div");
