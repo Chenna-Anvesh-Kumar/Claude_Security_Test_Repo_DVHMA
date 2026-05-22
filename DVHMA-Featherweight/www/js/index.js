@@ -70,7 +70,7 @@ function onLoadContent(e) {
 		window.todo.get(function(items) {
 			var id = e.target.parentNode.parentNode.dataset.id;
 			contentDiv.parentNode.getElementsByTagName("img")[0].src = "img/ic_action_collapse.png";
-			contentDiv.innerHTML = items[id]["content"];
+			contentDiv.textContent = items[id]["content"];
 			contentDiv.dataset.loaded = true;
 		}, logError);
 	}
@@ -99,7 +99,7 @@ function reloadItems(items) {
 		headDiv.appendChild(span);
 		
 		var p = document.createElement("p");
-		p.innerHTML = entry;
+		p.textContent = entry;
 		headDiv.appendChild(p);
 		
 		var buttonDiv = document.createElement("div");
