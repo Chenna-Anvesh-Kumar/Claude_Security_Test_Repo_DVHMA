@@ -24,6 +24,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
@@ -78,7 +79,12 @@ public class DVHMAStorage extends CordovaPlugin {
         SQLiteDatabase db = mDbHelper.getWritableDatabase();
         Cursor c = db.rawQuery("SELECT * FROM " + DVHMAStorageDbHelper.TABLE_NAME + ";", null);
         c.moveToPosition(index);
-        db.execSQL("UPDATE " + DVHMAStorageDbHelper.TABLE_NAME + " SET title='" + newTitle + "',content='" + newContent + "' WHERE id=" + c.getInt(c.getColumnIndex("id")) + ";");
+        int id = c.getInt(c.getColumnIndex("id"));
+        c.close();
+        ContentValues values = new ContentValues();
+        values.put("title", newTitle);
+        values.put("content", newContent);
+        db.update(DVHMAStorageDbHelper.TABLE_NAME, values, "id=?", new String[]{String.valueOf(id)});
         db.close();
 
         JSONArray result = queryDatabase();
@@ -138,7 +144,10 @@ public class DVHMAStorage extends CordovaPlugin {
         }
 
         SQLiteDatabase db = mDbHelper.getWritableDatabase();
-        db.execSQL("INSERT INTO " + DVHMAStorageDbHelper.TABLE_NAME + " (title,content) VALUES('" + newTitle + "','" + newContent + "');");
+        ContentValues values = new ContentValues();
+        values.put("title", newTitle);
+        values.put("content", newContent);
+        db.insert(DVHMAStorageDbHelper.TABLE_NAME, null, values);
         db.close();
 
         JSONArray result = queryDatabase();
