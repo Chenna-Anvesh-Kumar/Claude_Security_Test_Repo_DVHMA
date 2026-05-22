@@ -46,11 +46,25 @@ public class WebIntent extends CordovaPlugin {
         Intent i = ((CordovaActivity) this.cordova.getActivity()).getIntent();
         String extraName = args.getString(0);
         if (i.hasExtra(extraName)) {
-            callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, i.getStringExtra(extraName)));
+            String rawValue = i.getStringExtra(extraName);
+            String sanitizedValue = sanitizeHtml(rawValue);
+            callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.OK, sanitizedValue));
             return true;
         } else {
             callbackContext.sendPluginResult(new PluginResult(PluginResult.Status.ERROR));
             return false;
         }
+    }
+
+    private static String sanitizeHtml(String input) {
+        if (input == null) {
+            return null;
+        }
+        return input
+                .replace("&", "&amp;")
+                .replace("<", "&lt;")
+                .replace(">", "&gt;")
+                .replace("\"", "&quot;")
+                .replace("'", "&#x27;");
     }
 }

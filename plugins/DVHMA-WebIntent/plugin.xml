@@ -20,13 +20,9 @@
             </feature>
         </config-file>
 
-        <config-file target="AndroidManifest.xml" parent="/manifest/application/activity">
-                <intent-filter>
-                    <action android:name="android.intent.action.SEND" />
-                    <category android:name="android.intent.category.DEFAULT" />
-                    <data android:mimeType="text/plain" />
-                </intent-filter>
-        </config-file>
+        <!-- SEND intent-filter removed: it implicitly exported the activity,
+             allowing any co-installed app to inject attacker-controlled data
+             into JS sinks (XSS) and SQL-concatenating storage (SQLi). -->
         <source-file src="src/android/WebIntent.java" target-dir="src/com/borismus/webintent" />
     </platform>
 </plugin>
