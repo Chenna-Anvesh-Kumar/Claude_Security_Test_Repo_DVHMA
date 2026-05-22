@@ -8,7 +8,7 @@
 	This version of DVHMA, called Featherweight DVHMA, is designed to be a small as possible (e.g., avoiding large UI libraries such as Open UI5) while still beeing useful for security researchers.
     </description>
     <content src="index.html" />
-    <access origin="*" />
+    <access origin="file://*" />
     <plugin name="de.zertapps.dvhma.plugins.storage" spec="../plugins/DVHMA-Storage" />
     <plugin name="de.zertapps.dvhma.plugins.webintent" spec="../plugins/DVHMA-WebIntent" />
     <engine name="android" spec="~7.0.0" />
