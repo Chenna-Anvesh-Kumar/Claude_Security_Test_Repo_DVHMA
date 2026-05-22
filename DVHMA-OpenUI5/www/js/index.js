@@ -49,8 +49,8 @@ function onDeviceReady() {
 				}),
 				expand : function(evt) {
 					if (evt.getParameters().expand) {
-						this.addContent(new sap.ui.core.HTML({
-							content : "<div>{content}</div>"
+						this.addContent(new sap.m.Text({
+							text : "{content}"
 						}));
 					} else {
 						this.removeAllContent();
