@@ -8,6 +8,6 @@
 	This is the Open UI5 version of DVHMA.
     </description>
     <content src="index.html" />
-    <access origin="*" />
+    <access origin="file://*" />
 </widget>
 
