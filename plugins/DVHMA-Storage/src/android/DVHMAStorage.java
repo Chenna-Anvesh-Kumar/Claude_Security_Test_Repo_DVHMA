@@ -78,7 +78,7 @@ public class DVHMAStorage extends CordovaPlugin {
         SQLiteDatabase db = mDbHelper.getWritableDatabase();
         Cursor c = db.rawQuery("SELECT * FROM " + DVHMAStorageDbHelper.TABLE_NAME + ";", null);
         c.moveToPosition(index);
-        db.execSQL("UPDATE " + DVHMAStorageDbHelper.TABLE_NAME + " SET title='" + newTitle + "',content='" + newContent + "' WHERE id=" + c.getInt(c.getColumnIndex("id")) + ";");
+        db.execSQL("UPDATE " + DVHMAStorageDbHelper.TABLE_NAME + " SET title=?,content=? WHERE id=?;", new Object[]{newTitle, newContent, c.getInt(c.getColumnIndex("id"))});
         db.close();
 
         JSONArray result = queryDatabase();
@@ -138,7 +138,7 @@ public class DVHMAStorage extends CordovaPlugin {
         }
 
         SQLiteDatabase db = mDbHelper.getWritableDatabase();
-        db.execSQL("INSERT INTO " + DVHMAStorageDbHelper.TABLE_NAME + " (title,content) VALUES('" + newTitle + "','" + newContent + "');");
+        db.execSQL("INSERT INTO " + DVHMAStorageDbHelper.TABLE_NAME + " (title,content) VALUES(?,?);", new String[]{newTitle, newContent});
         db.close();
 
         JSONArray result = queryDatabase();
